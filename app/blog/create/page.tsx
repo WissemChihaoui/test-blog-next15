@@ -30,7 +30,7 @@ export default function CreateBlogPage() {
     setError('');
 
     try {
-      const response = await fetch('/api/blogs/create', {
+      const response = await fetch('/api/blogs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

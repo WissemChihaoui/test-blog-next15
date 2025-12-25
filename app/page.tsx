@@ -8,7 +8,7 @@ export default async function HomePage() {
   const blogs = await getAllBlogs();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100">
       <nav className="bg-white shadow-md border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">

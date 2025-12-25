@@ -1,9 +1,27 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getBlogBySlug } from '@/app/lib/blogService';
 
 export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } }
+  request: NextRequest,
+  context: { params: Promise<{ slug: string }> }
 ) {
-  // Get blog by slug logic
+  try {
+    const { slug } = await context.params;
+    const blog = await getBlogBySlug(slug);
+
+    if (!blog) {
+      return NextResponse.json(
+        { error: 'Blog post not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(blog);
+  } catch (error) {
+    console.error('Error fetching blog:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch blog post' },
+      { status: 500 }
+    );
+  }
 }
